@@ -1,0 +1,1 @@
+This is a test project that is meant to be standalone and applies the compiled plugin.

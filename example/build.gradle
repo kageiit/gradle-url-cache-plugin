@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.kageiit:url-cache-plugin:1.0.0"
+    }
+}
+
+allprojects {
+    beforeEvaluate {
+        project.buildscript {
+            apply plugin: 'com.kageiit.url-cache'
+            apply from: urlCache.get('https://raw.githubusercontent.com/kageiit/gradle-url-cache-plugin/master/example/shared-build-script-config.gradle')
+
+            repositories {
+                jcenter()
+            }
+
+            dependencies {
+                classpath "net.saliman:gradle-cobertura-plugin:${coberturaPluginVersion}"
+            }
+        }
+    }
+}

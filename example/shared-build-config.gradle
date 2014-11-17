@@ -1,0 +1,7 @@
+repositories {
+	jcenter()
+}
+
+task hello(type: DefaultTask) {
+    println "hello from ${project.name}"
+}

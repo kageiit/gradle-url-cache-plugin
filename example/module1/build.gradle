@@ -1,0 +1,2 @@
+apply plugin: 'com.kageiit.url-cache'
+apply from: urlCache.get('https://raw.githubusercontent.com/kageiit/gradle-url-cache-plugin/master/example/shared-build-config.gradle')
