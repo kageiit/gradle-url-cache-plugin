@@ -1,6 +1,7 @@
 package com.kageiit.urlCache
 
 import java.security.MessageDigest
+import java.util.concurrent.TimeUnit
 
 public final class UrlCacheExtension {
     private static final String FILE_NAME = "content"
@@ -8,10 +9,12 @@ public final class UrlCacheExtension {
 
     private final String cacheDir
     private final boolean isOffline
+    private final boolean forceRefresh
 
-    public UrlCacheExtension(String cacheDir, boolean isOffline) {
+    public UrlCacheExtension(String cacheDir, boolean isOffline, boolean forceRefresh) {
         this.cacheDir = cacheDir
         this.isOffline = isOffline
+        this.forceRefresh = forceRefresh
     }
 
     public final File get(String url) {
@@ -19,7 +22,17 @@ public final class UrlCacheExtension {
         contentDir.mkdirs()
 
         File content = new File(contentDir, FILE_NAME)
-        content.createNewFile()
+
+        boolean download
+        if (isOffline) {
+            download = false
+        } else {
+            download = forceRefresh || !content.exists() || (System.currentTimeMillis() - content.lastModified()) > TimeUnit.DAYS.toMillis(1)
+        }
+
+        if (!content.exists()) {
+            content.createNewFile()
+        }
 
         if (!isOffline) {
             try {
