@@ -14,6 +14,6 @@ class UrlCachePlugin implements Plugin<Project> {
         Gradle gradle = project.gradle
         project.extensions.add(URL_CACHE, new UrlCacheExtension(
                 "${gradle.gradleUserHomeDir}/caches/${URL_CACHE_DIRECTORY}",
-                gradle.startParameter.offline))
+                gradle.startParameter.offline, gradle.startParameter.refreshDependencies))
     }
 }

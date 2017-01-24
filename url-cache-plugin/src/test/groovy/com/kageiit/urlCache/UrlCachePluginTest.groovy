@@ -8,7 +8,7 @@ class UrlCachePluginTest {
     public void urlCache_created() {
         File.createTempDir().with {
             deleteOnExit()
-            UrlCacheExtension urlCacheExtension = new UrlCacheExtension(absolutePath, true)
+            UrlCacheExtension urlCacheExtension = new UrlCacheExtension(absolutePath, true, false)
             File content = urlCacheExtension.get("test")
 
             assert content.name.equals("content")
